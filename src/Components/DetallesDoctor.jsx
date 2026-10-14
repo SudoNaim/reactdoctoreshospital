@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios';
+import Global from '../Global';
 export default class DetallesDoctor extends Component {
     urlDoctores = Global.utlApiDoctores;
     state = {
@@ -14,7 +15,7 @@ export default class DetallesDoctor extends Component {
     }
 
     loadDoctorDatos = (idDoctor) => {
-        url = this.urlDoctores + "/api/Doctores/" + idDoctor;
+        let url = this.urlDoctores + "/api/Doctores/" + idDoctor;
         axios.get(url).then(response => {
             this.setState({
                 doctorApellido: response.data.apellido,
@@ -26,21 +27,46 @@ export default class DetallesDoctor extends Component {
         })
     }
 
-    didUpdate = (prevProps) => {
+    componentDidUpdate = (prevProps) => {
         if (prevProps.idDoctor !== this.props.idDoctor) {
             console.log("DetallesDoctor: ", this.props.idDoctor);
-
+            this.loadDoctorDatos(this.props.idDoctor);
         }
     }
   render() {
     return (
       <div>
         <h3>Detalles del Doctor</h3>
-        <p>Nombre: {}</p>
-        <p>Especialidad: {}</p>
-        <p>Salario: {}</p>
-        <p>Id Hospital: {}</p>
-        <p>Id Doctor: {}</p>
+        <table className="table">
+          <thead>
+            <tr>
+              <th scope="col">Dato</th>
+              <th scope="col">Valor</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Nombre</th>
+              <td>{this.state.doctorApellido}</td>
+            </tr>
+            <tr>
+              <th scope="row">Especialidad</th>
+              <td>{this.state.doctorEspecialidad}</td>
+            </tr>
+            <tr>
+              <th scope="row">Salario</th>
+              <td>{this.state.doctorSalario}</td>
+            </tr>
+            <tr>
+              <th scope="row">Id Hospital</th>
+              <td>{this.state.doctorIdHospital}</td>
+            </tr>
+            <tr>
+              <th scope="row">Id Doctor</th>
+              <td>{this.state.doctorIdDoctor}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     )
   }

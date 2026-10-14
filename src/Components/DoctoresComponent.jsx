@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import Global from "../Global";
 import axios from "axios";
 import DetallesDoctor from "./DetallesDoctor";
+import ServiceHospitales from "../Services/ServiceHospitales";
 export default class DoctoresComponent extends Component {
     urlDoctores = Global.utlApiDoctores;
-
+    ServiceHospitales = new ServiceHospitales();
     state = {
         doctores: [],
         doctorDetalles: null
@@ -20,17 +21,16 @@ export default class DoctoresComponent extends Component {
     }
 
     loadDoctores = () => {
-        let request = "/api/Doctores/DoctoresHospital/" + this.props.idHospital;
-        console.log("URL DOCTORES: "+this.urlDoctores + request);
-        axios.get(this.urlDoctores + request).then(response => {
+        this.ServiceHospitales.getDoctoresHospital(this.props.idHospital).then(doctores => {
+            console.log("Doctores cargados: ", doctores);
             this.setState({
-                doctores: response.data
+                doctores: doctores
             });
-        })
+        });
     }
 
     loadDoctorDatos = (idDoctor) => {
-        setState({
+        this.setState({
             doctorDetalles: idDoctor
         });
     }
@@ -43,7 +43,8 @@ export default class DoctoresComponent extends Component {
                 <ul>
                     {this.state.doctores.map((doctor, index) => (
                         <li key={index}>
-                            {doctor.especialidad} - {doctor.apellido}
+                            <p>{doctor.especialidad} - {doctor.apellido}&ensp;&ensp;&ensp;</p>
+                            
                             <button onClick={() => this.loadDoctorDatos(doctor.idDoctor)}>Ver detalles</button>
                         </li>
                     ))}

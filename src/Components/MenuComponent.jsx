@@ -28,7 +28,7 @@ export default class MenuComponent extends Component {
         return (
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <div className="container-fluid"> {/* En BS5 se suele envolver en un container */}
-                    <a className="navbar-brand" href="#">Navbar</a>
+                    <a className="navbar-brand" href="#">HOSPITAL WEB DEL ESTADO</a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
@@ -36,6 +36,12 @@ export default class MenuComponent extends Component {
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0"> {/* mr-auto cambió a me-auto en BS5 */}
                             <li className="nav-item">
                                 <NavLink className="nav-link active" aria-current="page" to="/">Home</NavLink>
+                            </li>
+                            <li className="nav-item">
+                                <NavLink className="nav-link" to="/hospitales">Hospitales</NavLink>
+                            </li>
+                            <li className="nav-item">
+                                <NavLink className="nav-link" to="/ejemplosservicios">Servicios Ejemplos</NavLink>
                             </li>
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="/doctores/22">Doctores</NavLink>
@@ -57,7 +63,7 @@ export default class MenuComponent extends Component {
                                 </ul>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link disabled" href="#" tabIndex="-1" aria-disabled="true">Disabled</a>
+                                <a className="nav-link" href="/createhospital">Crear Hospital</a>  
                             </li>
                         </ul>
                     </div>
